@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html manifest="cache.manifest">
+<head>
+<meta charset="UTF-8">
+<title>Installing Offline Cache...</title>
+<style>
+body {
+  background: #000;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#msgs {
+  position: relative;
+  top: 40%;
+}
+</style>
+<script>
+function DLProgress(e) {
+  if (e.lengthComputable) {
+    var percent = Math.round(e.loaded / e.total * 100);
+    document.getElementById("msgs").textContent =
+      "Installing Offline Cache ... " + percent + "%";
+  }
+}
+
+function goBackToIndex() {
+  document.getElementById("msgs").textContent = "Cache Installed Successfully";
+  setTimeout(function() {
+    window.location.replace("index.html");
+  }, 3000); // بعد از ۳ ثانیه برمی‌گرده به index.html
+}
+
+window.addEventListener("load", function() {
+  window.applicationCache.addEventListener("progress", DLProgress, false);
+  window.applicationCache.oncached = function() { goBackToIndex(); };
+  window.applicationCache.onupdateready = function() { goBackToIndex(); };
+});
+</script>
+</head>
+<body>
+<div id="msgs">Starting cache...</div>
+</body>
+</html>

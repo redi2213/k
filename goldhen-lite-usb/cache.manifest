@@ -1,0 +1,13 @@
+CACHE MANIFEST
+# Generated: 2025-08-07T12:49:40.197114 UTC
+
+CACHE:
+cache.html
+index.html
+payload.bin
+cache.manifest
+
+FALLBACK:
+
+NETWORK:
+*
