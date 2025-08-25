@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>GoldHEN Launcher</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Tahoma, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    h1 {
+      margin-bottom: 40px;
+    }
+    .button {
+      display: block;
+      width: 80%;
+      max-width: 300px;
+      margin: 10px auto;
+      padding: 15px;
+      background-color: #444;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 GoldHEN Launcher</h1>
+  	
+  
+  <a class="button" href="goldhen-usb/index.html">GoldHEN with USB</a>
+<a class="button" href="goldhen-no-usb/index.html">GoldHEN without USB</a>
+<a class="button" href="goldhen-lite-usb/index.html">GoldHEN Lite with USB</a>
+<a class="button" href="goldhen-lite-no-usb/index.html">GoldHEN Lite without USB</a>
+<a class="button" href="goldhen-usb-cache/index.html">GoldHEN USB Cache Restore</a>
+<a class="button" href="goldhen-lite-pro-usb/index.html">GoldHEN Lite Pro with USB</a>
+<a class="button" href="goldhen-lite-cache/index.html">GoldHEN Lite Cache Restore</a>
+<a class="button" href="goldhen-js/index.html">GoldHEN Js with USB</a>
+<a class="button" href="goldhen-online/index.html">GoldHEN & Lite Online</a>
+
+
+  <a class="button" href="#" onclick="activateCache()">📦 کش آفلاین</a>
+
+  <script>
+    function activateCache() {
+      if (window.applicationCache.status === 0) {
+        window.location.replace("cache.html");
+      } else {
+        alert("کش قبلاً فعال شده یا پشتیبانی نمی‌شود.");
+      }
+    }
+  </script>
+</body>
+</html>
