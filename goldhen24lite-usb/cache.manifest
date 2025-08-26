@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# Generated: 2025-08-07T12:49:29.642132 UTC
+
+CACHE:
+cache.html
+index.html
+cache.manifest
+
+FALLBACK:
+
+NETWORK:
+*
