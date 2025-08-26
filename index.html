@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
+	 <script>
+    if (window.applicationCache.status === 0) {
+      window.location.replace("cache.html");
+    }
+  </script>
   <meta charset="UTF-8">
   <title>GoldHEN Launcher</title>
   <style>
@@ -49,14 +54,6 @@
 
   <a class="button" href="#" onclick="activateCache()">📦 کش آفلاین</a>
 
-  <script>
-    function activateCache() {
-      if (window.applicationCache.status === 0) {
-        window.location.replace("cache.html");
-      } else {
-        alert("کش قبلاً فعال شده یا پشتیبانی نمی‌شود.");
-      }
-    }
-  </script>
+ 
 </body>
 </html>
