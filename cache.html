@@ -1,21 +1,46 @@
 <html manifest="cache.manifest">
 <head>
-
-<style>
-body{background:url('icon0.png'); linear-gradient(to bottom right, #063FAB, #01258A);color:white;font-size:28px;text-align:center;margin:0;overflow:hidden;}
-.info{position:relative;top:39%;}
-</style>
-<script>
-history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
-function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));msgs.innerHTML="Installing Offline Cache ... " + Percent + "%"};
-function DisplayCacheProgress(){
-setTimeout(function(){msgs.innerHTML="Cache Installed Successfully";},2000);
-setTimeout(function(){location.reload();},3000);
-}
-window.applicationCache.addEventListener("progress",DLProgress,false);window.applicationCache.oncached=function(e){DisplayCacheProgress();};window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
-</script>
+  <meta charset="utf-8">
+  <title>Cache Installer</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Tahoma, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #progress {
+      font-size: 22px;
+      margin-top: 40vh;
+    }
+  </style>
+  <script>
+    window.onload = function(e){
+      if(sessionStorage.Queue==null){
+        sessionStorage.Queue="";
+      } else if(sessionStorage.Queue!=""){
+        executependingqueue(sessionStorage.Queue);
+      }
+    };
+    window.applicationCache.ondownloading=function(){
+      document.getElementById("progress").innerHTML="Page Caching Started!!";
+    };
+    window.applicationCache.onprogress=function(a){
+      document.getElementById("progress").innerHTML=
+        "Caching Status: "+(Math.round(100*(a.loaded/a.total)))+"% Completed";
+    };
+    window.applicationCache.oncached=function(){
+      document.getElementById("progress").innerHTML="Page Cached Successfully!!";
+      setTimeout(function(){
+        document.getElementById("progress").innerHTML=
+          "Turn Off the Internet & Reopen the Page to Run the Exploit!!";
+      },1500);
+    };
+  </script>
 </head>
-<body style=overflow:hidden>
-<div id=msgs class=info style='-webkit-font-feature-settings:"tnum";font-feature-settings:"tnum";'></div>
+<body>
+  <div id="progress">Loading...</div>
 </body>
 </html>
