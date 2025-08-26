@@ -1,0 +1,46 @@
+<html manifest="cache.manifest">
+<head>
+  <meta charset="utf-8">
+  <title>Cache Installer</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: Tahoma, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #progress {
+      font-size: 22px;
+      margin-top: 40vh;
+    }
+  </style>
+  <script>
+    window.onload = function(e){
+      if(sessionStorage.Queue==null){
+        sessionStorage.Queue="";
+      } else if(sessionStorage.Queue!=""){
+        executependingqueue(sessionStorage.Queue);
+      }
+    };
+    window.applicationCache.ondownloading=function(){
+      document.getElementById("progress").innerHTML="Page Caching Started!!";
+    };
+    window.applicationCache.onprogress=function(a){
+      document.getElementById("progress").innerHTML=
+        "Caching Status: "+(Math.round(100*(a.loaded/a.total)))+"% Completed";
+    };
+    window.applicationCache.oncached=function(){
+      document.getElementById("progress").innerHTML="Page Cached Successfully!!";
+      setTimeout(function(){
+        document.getElementById("progress").innerHTML=
+          "Turn Off the Internet & Reopen the Page to Run the Exploit!!";
+      },1500);
+    };
+  </script>
+</head>
+<body>
+  <div id="progress">Loading...</div>
+</body>
+</html>
