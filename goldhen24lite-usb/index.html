@@ -908,7 +908,7 @@ var trigger_spray = function () {
     chain.run();
 
     //Trigger OOB
-    alert("الان فلش را وارد کنید\n\nNote: تا زمانی که اعلان ظاهر شد و ناپدید نشد، اوکی را نزنید\nNote: بعد از رفتن هشدار، فلش را حذف کنید.");
+    alert("الان فلش را وارد کنید\n\nNote: تا زمانی که اعلان ظاهر شد و ناپدید نشد، اوکی را نزنید\nNote: بعد از رفتن هشدار، فلش را بردارید و اوکی را بزنید.");
     //Trigger corrupt knote
     {
         for (var i = 1; i < NUM_KQUEUES; i += 2) {
@@ -1043,7 +1043,7 @@ function poc() {
     }
     while (guessed_addr === null);
 	//alert("GUESSED FONT: "+guessed_font+"\nGUESSED ADDR: "+guessed_addr+"\nGUF Val: "+guf+"\nLoop Count: "+round);
-	alert("وبکیت با موفقیت مورد سوء استفاده قرار گرفت !! در حال راه اندازی کپی خور");
+	alert("وبکیت با موفقیت مورد سوء استفاده قرار گرفت !! در حال راه اندازی کپی خور و اوکی را بزنید");
     var p_s = '';
     p_s += ptrToString(26);
     p_s += ptrToString(guessed_addr);
