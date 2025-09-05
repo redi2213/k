@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" manifest="cache.manifest">
+<head>
+    <meta charset="utf-8">
+    <title>P30Day Host No-USB FW9.00 </title>
+    <style>
+        body{
+            text-shadow: 0.2em 0.3em 0.3em black;
+            background-image: url("img.jpg");
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: #24272b;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            direction: rtl;
+            font-size:17px;
+        }
+        h1 { text-shadow: 0.2em 0.3em 0.3em black; font-size: 35px; color: white; }
+        h2 { text-shadow: 0.2em 0.3em 0.3em black; font-size: 30px; color: white; }
+
+        @font-face {
+            font-family: 'logging';
+            src: url('fonts/LiberationMono-Regular.ttf');
+        }
+        #console { font-family: 'logging'; direction: ltr; text-align: left; white-space: pre-wrap;
+                    color: #FFF; background-color: #6f707433; border-radius: 18px; width: 90%; 
+                    height: 18%; margin: 0 auto; border: 1px solid #FFB84D; padding: 10px;
+                    display: flex; align-items: center; position: absolute; bottom: 18px; left: 5px; right: 5px;
+                    overflow-y: auto; overflow-x: hidden; }
+        .warning { font-size: 25px; background-color: rgba(0, 0, 0, 0.3); border: 1px solid #fff;
+                    padding: 10px; margin: 10px 0; border-radius: 10px; text-align: center; color: white; }
+        button {
+            background: rgba(0,0,0,0.5);
+            box-shadow: 0 5px 20px 0 white;
+            border: 2px solid black;
+            border-radius: 15px;
+            width: 250px;
+            height: 65px;            
+            text-align: center;
+            margin-left: 35px;
+            font-size: 30px;
+            text-shadow: 4px 4px 4px black;
+            color: #CEC52A;
+            cursor: pointer;
+        }
+        button:hover {
+            box-shadow: 0 5px 50px 0 white;
+            color: white;
+            border-radius: 10px;
+            background-color: #0F0F53;
+        }
+        #DebugConsole h3 {
+            color: #FFF; font-size: 1em; font-weight: bold; letter-spacing: .08em;
+            background-color: rgba(0, 0, 0, 0.8); border: 1px solid #FFB84D; border-radius: 18px;
+            padding: 10px; pointer-events: auto; position: absolute; bottom: 25%; align-items: center;
+            display: flex; margin: 0 auto; left: 5%;
+        }
+    </style>
+</head>
+<body style="margin-top: 10px;">
+    <h1>هاست پی سی دی فریمور 9.00 بدون فلش</h1>
+    <hr>
+    <div class="warning">
+        <strong style="font-size: 35px;"><b>مهم</b></strong> 
+        <ul style="text-align: right; list-style-position: inside;">
+            <li>درصورتی که با خطا مواجه شدید دوباره تلاش نکنید. فقط کنسول را ری استارت کنید و تلاش کنید</li>
+            <li>فایل aio Fix اضافه شد و مشکلات عدم اجرای بازی ها را برطرف کرده است</li>
+            <li>این جیلبریک جدید و این هاست هیچ نیازی به فلش ندارد.</li>
+            <li>گلدهن بعد از چند ثانیه به صورت اتوماتیک لود می شود</li>
+            <li>تاریخ بروزرسانی: 1404/06/01</li>
+        </ul>
+    </div> 
+    <br><br>
+    <button id="button-Payload">گلدهن v2.4b18.5</button>
+    <h2></h2>
+    <br>
+    <div id="DebugConsole">
+      <h3>Debug Console</h3>
+      <div class="console" style="padding: 20px;"><pre id='console'></pre></div>
+    </div>
+
+    <script>
+        // ====================== GoldHEN ======================
+        const consoleElement = document.getElementById('console');
+        function log(msg){
+            consoleElement.textContent += msg + "\n";
+            consoleElement.scrollTop = consoleElement.scrollHeight;
+        }
+
+        function goldhen24(){
+            const script2 = document.createElement('script');
+            script2.src = 'alert_24.mjs';
+            script2.type = 'module';
+            document.body.appendChild(script2);
+            log("Payload گلدهن لود شد...");
+        }
+        document.getElementById('button-Payload').addEventListener('click', goldhen24);
+
+        // ====================== Application Cache + نوار پیشرفت ======================
+        if(window.applicationCache){
+            const cachedKey = 'psfree_cache_done';
+            if(localStorage.getItem(cachedKey)) return;
+
+            const progressContainer = document.createElement('div');
+            progressContainer.style.position = 'fixed';
+            progressContainer.style.bottom = '10px';
+            progressContainer.style.right = '10px';
+            progressContainer.style.width = '180px';
+            progressContainer.style.height = '25px';
+            progressContainer.style.background = 'rgba(0,0,0,0.5)';
+            progressContainer.style.border = '1px solid #fff';
+            progressContainer.style.borderRadius = '8px';
+            progressContainer.style.zIndex = '9999';
+            progressContainer.style.overflow = 'hidden';
+
+            const progressFill = document.createElement('div');
+            progressFill.style.width = '0%';
+            progressFill.style.height = '100%';
+            progressFill.style.background = 'linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899)';
+            progressFill.style.transition = 'width 0.2s ease';
+
+            const progressText = document.createElement('div');
+            progressText.style.position = 'absolute';
+            progressText.style.top = '0';
+            progressText.style.left = '50%';
+            progressText.style.transform = 'translateX(-50%)';
+            progressText.style.color = '#fff';
+            progressText.style.fontSize = '14px';
+            progressText.style.fontFamily = 'monospace';
+            progressText.style.fontWeight = 'bold';
+            progressText.style.pointerEvents = 'none';
+            progressText.innerText = '0%';
+
+            progressContainer.appendChild(progressFill);
+            progressContainer.appendChild(progressText);
+            document.body.appendChild(progressContainer);
+
+            // Event های Application Cache
+            window.applicationCache.ondownloading = function(){
+                progressText.innerText = "درحال دانلود کش...";
+                localStorage.setItem(cachedKey,'0');
+            };
+            window.applicationCache.onprogress = function(e){
+                if(e.lengthComputable){
+                    const percent = Math.round((e.loaded / e.total) * 100);
+                    progressFill.style.width = percent + '%';
+                    progressText.innerText = percent + '%';
+                } else {
+                    // Fallback انیمیشن ساده
+                    let width = parseInt(progressFill.style.width) || 0;
+                    if(width < 100) width += 5;
+                    progressFill.style.width = width + '%';
+                    progressText.innerText = width + '%';
+                }
+            };
+            window.applicationCache.oncached = window.applicationCache.onupdateready = function(){
+                progressFill.style.width = '100%';
+                progressText.innerText = '✅ کش شد';
+                localStorage.setItem(cachedKey,'1');
+                setTimeout(()=>{progressContainer.style.display='none';}, 2000);
+            };
+            window.applicationCache.onerror = function(){
+                progressText.innerText = '❌ خطا در کش';
+                log('خطا در نصب کش');
+            };
+        }
+    </script>
+</body>
+</html>
